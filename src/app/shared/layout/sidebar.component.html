@@ -1,0 +1,9 @@
+<aside class="app-sidebar">
+  <nav>
+    @for(section of sections; track section){
+    <a [routerLink]="section.route" class="link" routerLinkActive="active">
+      {{ section.label }}
+    </a>
+}
+  </nav>
+</aside>

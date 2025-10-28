@@ -1,0 +1,47 @@
+<div class="overview-container fade-in-up">
+  <header class="overview-header">
+    <h2>Project Overview</h2>
+    <p class="subtext">A quick summary of all your ongoing projects and their task progress.</p>
+  </header>
+
+  @if (overviewData$ | async; as overviewList) {
+    @if (overviewList.length > 0) {
+      <div class="overview-grid">
+        @for (item of overviewList; track item.project.id) {
+          <div class="overview-card fade-in">
+            <div class="overview-card-top">
+              <h3>{{ item.project.name }}</h3>
+              <p class="desc">{{ item.project.description || 'No description provided' }}</p>
+            </div>
+
+            <div class="stats">
+              <div class="stat total">
+                <span class="label">Total Tasks</span>
+                <span class="value">{{ item.totalTasks }}</span>
+              </div>
+
+              <div class="stat not-started">
+                <span class="label">Not Started</span>
+                <span class="value">{{ item.notStarted }}</span>
+              </div>
+
+              <div class="stat in-progress">
+                <span class="label">In Progress</span>
+                <span class="value">{{ item.inProgress }}</span>
+              </div>
+
+              <div class="stat completed">
+                <span class="label">Completed</span>
+                <span class="value">{{ item.completed }}</span>
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+    } @else {
+      <div class="empty-state fade-in">
+        <p>No projects found. Start by creating one!</p>
+      </div>
+    }
+  }
+</div>

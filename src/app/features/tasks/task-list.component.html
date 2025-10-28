@@ -1,0 +1,95 @@
+<div class="task-list-container">
+  <header class="task-header">
+    <h2>My Tasks</h2>
+    <button class="create-task-btn" (click)="openTaskModal()">+ Add Task</button>
+  </header>
+
+  @if (tasks$ | async; as tasks) {
+    @if (tasks.length > 0) {
+      <div class="task-grid">
+        @for (task of tasks; track task.id) {
+          <div class="task-card fade-in">
+            <div class="task-top">
+              <h3 class="task-title">{{ task.title }}</h3>
+              <span
+                class="status-pill"
+                [ngClass]="{
+                  'not-started': task.status === 'Not Started',
+                  'in-progress': task.status === 'In Progress',
+                  'completed': task.status === 'Completed'
+                }"
+              >
+                {{ task.status }}
+              </span>
+            </div>
+
+            <p class="desc">{{ task.description || 'No description provided' }}</p>
+
+            <div class="meta">
+              <span class="meta-item">Due: {{ task.dueDate | date: 'mediumDate' }}</span>
+              <span class="meta-item">Priority: {{ task.priority }}</span>
+            </div>
+
+            <div class="task-actions">
+              <button class="edit-btn" (click)="editTask(task)">Edit</button>
+              <button class="delete-btn" (click)="openDeletePopup(task.id)">Delete</button>
+            </div>
+          </div>
+        }
+      </div>
+    } @else {
+      <div class="empty-state fade-in">
+        <p>No tasks found. Create one to get started!</p>
+      </div>
+    }
+  }
+
+  <!-- ✳️ Task Modal -->
+  @if (isModalOpen) {
+    <div class="modal-overlay" (click)="closeTaskModal()"></div>
+    <div class="modal fade-in-up">
+      <form [formGroup]="taskFormGroup" (ngSubmit)="addOrUpdateTask()" class="task-form">
+        <h3>{{ isEditMode ? 'Edit Task' : 'Add New Task' }}</h3>
+
+        <label>Title</label>
+        <input formControlName="title" placeholder="Enter title" />
+        @if (taskFormGroup.get('title')?.invalid && taskFormGroup.get('title')?.touched) {
+          <small class="error">Title is required</small>
+        }
+
+        <label>Description</label>
+        <textarea formControlName="description" placeholder="Enter description"></textarea>
+
+        <label>Due Date</label>
+        <input formControlName="dueDate" type="date" />
+
+        <label>Priority</label>
+        <input formControlName="priority" placeholder="Enter priority" />
+
+        <label>Status</label>
+        <select formControlName="status">
+          @for (option of DROPDOWN_OPTIONS; track option.value) {
+            <option [value]="option.value">{{ option.label }}</option>
+          }
+        </select>
+
+        <div class="btn-group">
+          <button type="submit" [disabled]="taskFormGroup.invalid" class="submit-btn">
+            {{ isEditMode ? 'Update Task' : 'Add Task' }}
+          </button>
+          <button type="button" class="cancel-btn" (click)="closeTaskModal()">Cancel</button>
+        </div>
+      </form>
+    </div>
+  }
+
+  <!-- ⚙️ Delete Confirmation -->
+  <app-confirm-popup
+    [isOpen]="isPopupOpen"
+    message="Are you sure you want to delete this task?"
+    confirmText="Yes"
+    cancelText="Cancel"
+    (confirm)="handleConfirmDelete()"
+    (cancel)="handleCancelDelete()"
+  ></app-confirm-popup>
+</div>

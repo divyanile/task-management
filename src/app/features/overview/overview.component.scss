@@ -1,0 +1,145 @@
+.overview-container {
+  padding: 2.5rem;
+  background: #f8fafc;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.overview-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  h2 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #1e293b;
+  }
+
+  .subtext {
+    color: #64748b;
+    font-size: 0.95rem;
+  }
+}
+
+.overview-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.overview-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  border-top: 4px solid #2563eb;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 18px rgba(37, 99, 235, 0.12);
+  }
+
+  .overview-card-top {
+    margin-bottom: 1rem;
+
+    h3 {
+      color: #1e293b;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    .desc {
+      color: #475569;
+      font-size: 0.9rem;
+    }
+  }
+
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+
+    .stat {
+      background: #f1f5f9;
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      text-align: center;
+      transition: transform 0.2s ease;
+
+      &:hover {
+        transform: scale(1.04);
+      }
+
+      .label {
+        display: block;
+        font-size: 0.85rem;
+        color: #64748b;
+      }
+
+      .value {
+        font-weight: 700;
+        font-size: 1.1rem;
+        color: #1e293b;
+      }
+
+      &.total {
+        background: #dbeafe;
+        border-left: 4px solid #2563eb;
+      }
+
+      &.not-started {
+        background: #f1f5f9;
+        border-left: 4px solid #64748b;
+      }
+
+      &.in-progress {
+        background: #f5e3cd;
+        border-left: 4px solid #ff900b;
+      }
+
+      &.completed {
+        background: #dcfce7;
+        border-left: 4px solid #16a34a;
+      }
+    }
+  }
+}
+
+.empty-state {
+  text-align: center;
+  color: #6b7280;
+  font-style: italic;
+  padding: 2rem 0;
+}
+
+.fade-in {
+  animation: fadeIn 0.4s ease;
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

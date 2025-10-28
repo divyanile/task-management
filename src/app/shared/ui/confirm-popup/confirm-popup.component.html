@@ -1,0 +1,13 @@
+@if (isOpen) {
+  <div class="popup-overlay fade-in">
+    <div class="popup-card fade-in-up">
+      <h3>⚠️</h3>
+      <p>{{ message }}</p>
+
+      <div class="popup-actions">
+        <button class="confirm-btn" (click)="onConfirm()">{{ confirmText }}</button>
+        <button class="cancel-btn" (click)="onCancel()">{{ cancelText }}</button>
+      </div>
+    </div>
+  </div>
+}

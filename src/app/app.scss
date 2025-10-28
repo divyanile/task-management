@@ -12,4 +12,8 @@ app-header{
 }
 main{
     width: calc(100% - 200px);
+    @media screen and (max-width: 768px) {
+        width: 100%;
+        height: calc(100% - 65px);
+    }
 }

@@ -4,20 +4,47 @@
   gap: 2rem;
   padding: 2.5rem;
   background: #f8fafc;
-  min-height: 100%;
+  height: 100%;
+  overflow: auto;
   animation: fadeIn 0.4s ease-in;
+
+  @media (max-width: 992px) {
+    padding: 2rem;
+  }
+
+  @media (max-width: 768px) {
+    padding: 1.5rem;
+    gap: 1.5rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 1rem;
+    gap: 1rem;
+  }
 }
 
-// Header
+/* 🔹 Header */
 .task-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
 
   h2 {
     font-size: 1.75rem;
     font-weight: 700;
     color: #1e293b;
+
+    @media (max-width: 768px) {
+      font-size: 1.5rem;
+    }
+
+    @media (max-width: 480px) {
+      font-size: 1.3rem;
+      text-align: center;
+      width: 100%;
+    }
   }
 
   .create-task-btn {
@@ -35,17 +62,32 @@
       transform: translateY(-2px);
       background: linear-gradient(135deg, #1e40af, #1d4ed8);
     }
+
+    @media (max-width: 480px) {
+      width: 100%;
+      text-align: center;
+      padding: 12px;
+    }
   }
 }
 
-// Grid Layout
+/* 🔹 Task Grid Layout */
 .task-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 1.5rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  }
+
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
 }
 
-// Task Card
+/* 🔹 Task Card */
 .task-card {
   background: #ffffff;
   border-radius: 12px;
@@ -59,15 +101,29 @@
     box-shadow: 0 8px 20px rgba(37, 99, 235, 0.15);
   }
 
+  @media (max-width: 768px) {
+    padding: 1.25rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 1rem;
+  }
+
   .task-top {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
 
     .task-title {
       font-weight: 600;
       color: #1e293b;
       font-size: 1.1rem;
+
+      @media (max-width: 480px) {
+        font-size: 1rem;
+      }
     }
 
     .status-pill {
@@ -89,6 +145,11 @@
         background: #dcfce7;
         color: #16a34a;
       }
+
+      @media (max-width: 480px) {
+        font-size: 0.75rem;
+        padding: 3px 8px;
+      }
     }
   }
 
@@ -96,13 +157,24 @@
     margin: 1rem 0;
     color: #475569;
     font-size: 0.9rem;
+    line-height: 1.4;
+
+    @media (max-width: 480px) {
+      font-size: 0.85rem;
+    }
   }
 
   .meta {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5rem;
     font-size: 0.85rem;
     color: #6b7280;
+
+    @media (max-width: 480px) {
+      font-size: 0.8rem;
+    }
   }
 
   .task-actions {
@@ -110,6 +182,11 @@
     justify-content: space-between;
     gap: 0.5rem;
     margin-top: 1rem;
+
+    @media (max-width: 480px) {
+      flex-direction: column;
+      gap: 0.75rem;
+    }
 
     button {
       flex: 1;
@@ -141,7 +218,7 @@
   }
 }
 
-// Modal
+/* 🔹 Modal Overlay */
 .modal-overlay {
   position: fixed;
   inset: 0;
@@ -151,6 +228,7 @@
   animation: fadeIn 0.4s ease;
 }
 
+/* 🔹 Modal Window */
 .modal {
   position: fixed;
   top: 50%;
@@ -165,9 +243,18 @@
   z-index: 100;
   animation: fadeInUp 0.5s ease;
 
+  @media (max-width: 480px) {
+    padding: 1.5rem;
+  }
+
   h3 {
     margin-bottom: 1rem;
     color: #1e293b;
+    text-align: center;
+
+    @media (max-width: 480px) {
+      font-size: 1.2rem;
+    }
   }
 
   .task-form {
@@ -178,6 +265,7 @@
     label {
       font-weight: 600;
       color: #334155;
+      font-size: 0.95rem;
     }
 
     input,
@@ -200,6 +288,7 @@
       display: flex;
       justify-content: flex-end;
       gap: 1rem;
+      flex-wrap: wrap;
 
       .submit-btn {
         background: linear-gradient(135deg, #2563eb, #1d4ed8);
@@ -218,6 +307,10 @@
           opacity: 0.6;
           cursor: not-allowed;
         }
+
+        @media (max-width: 480px) {
+          width: 100%;
+        }
       }
 
       .cancel-btn {
@@ -231,6 +324,10 @@
         &:hover {
           background: #d1d5db;
         }
+
+        @media (max-width: 480px) {
+          width: 100%;
+        }
       }
     }
 
@@ -241,15 +338,20 @@
   }
 }
 
-// Empty State
+/* 🔹 Empty State */
 .empty-state {
   text-align: center;
   color: #6b7280;
   font-style: italic;
   padding: 2rem 0;
+
+  @media (max-width: 480px) {
+    font-size: 0.9rem;
+    padding: 1rem 0;
+  }
 }
 
-// Animations
+/* 🔹 Animations */
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
